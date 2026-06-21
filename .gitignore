@@ -1,3 +1,17 @@
 .agents/skills/
 node_modules/
 .env
+
+# FVM Version Cache
+.fvm/
+
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+*.iml
+.idea/
+
+# Generated plugin registrant ephemeral dir
+linux/flutter/ephemeral/
