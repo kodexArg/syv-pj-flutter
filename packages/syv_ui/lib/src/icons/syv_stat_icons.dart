@@ -1,13 +1,113 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-/// The three character-sheet stat glyphs, rendered as Lucide-style stroke icons
-/// via [CustomPainter]. Each is drawn on a 24×24 canvas (inherits [color]) and
-/// scaled to [size]:
+/// The three character-sheet stat glyphs, rendered as Lucide-style stroke icons.
 ///
-///  * [SyvStatIcon.cuerpo] — biceps-flexed (fuerza · resistencia)
-///  * [SyvStatIcon.mente]  — optical reticle (puntería · reflejos)
-///  * [SyvStatIcon.alma]   — laurels (aura · liderazgo · voluntad)
+/// Each glyph is available as:
+///  * A raw SVG string constant (used by [SyvStatSvg] for faithful rendering).
+///  * A [CustomPainter] fallback (used by [SyvStatIcon] for legacy compat).
+///
+/// Glyphs:
+///  * [SyvStatGlyph.cuerpo] — biceps-flexed (fuerza · resistencia)
+///  * [SyvStatGlyph.mente]  — optical reticle (puntería · reflejos)
+///  * [SyvStatGlyph.alma]   — laurels (aura · liderazgo · voluntad)
 enum SyvStatGlyph { cuerpo, mente, alma }
+
+// ---------------------------------------------------------------------------
+// SVG source strings — single source of truth for path data.
+// All viewBox="0 0 24 24", stroke-width 1.7, round caps/joins.
+// ---------------------------------------------------------------------------
+
+/// Cuerpo — biceps-flexed (Lucide).
+const String kSvgCuerpo =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+    'stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'
+    '<path d="M12.409 13.017A5 5 0 0 1 22 15c0 3.866-4 7-9 7-4.077 0-8.153-.82'
+    '-10.371-2.462-.426-.316-.631-.832-.62-1.362C2.118 12.723 2.627 2 10 2a3 3 '
+    '0 0 1 3 3 2 2 0 0 1-2 2c-1.105 0-1.64-.444-2-1"/>'
+    '<path d="M15 14a5 5 0 0 0-7.584 2"/>'
+    '<path d="M9.964 6.825C8.019 7.977 9.5 13 8 15"/>'
+    '</svg>';
+
+/// Mente — optical reticle.
+const String kSvgMente =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+    'stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'
+    '<circle cx="12" cy="12" r="8.5"/>'
+    '<circle cx="12" cy="12" r="3.2"/>'
+    '<path d="M12 1.5V4M12 20v2.5M1.5 12H4M20 12h2.5"/>'
+    '</svg>';
+
+/// Alma — laurels.
+const String kSvgAlma =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+    'stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'
+    '<path d="M12 21c-5-1.4-8-5.6-6.6-12"/>'
+    '<path d="M7 6.4c1.5.3 2.5 1.4 2.7 3M5.7 10.3c1.6.1 2.8 1 3.3 2.6'
+    'M6.2 14.6c1.5-.2 2.9.4 3.7 1.9"/>'
+    '<path d="M12 21c5-1.4 8-5.6 6.6-12"/>'
+    '<path d="M17 6.4c-1.5.3-2.5 1.4-2.7 3M18.3 10.3c-1.6.1-2.8 1-3.3 2.6'
+    'M17.8 14.6c-1.5-.2-2.9.4-3.7 1.9"/>'
+    '<path d="M12 2.6v3"/>'
+    '</svg>';
+
+// ---------------------------------------------------------------------------
+// SyvStatSvg — faithful SVG render via flutter_svg with ColorFilter tinting.
+// ---------------------------------------------------------------------------
+
+/// Renders a stat glyph from its SVG source string, tinted to [color].
+///
+/// Preferred over [SyvStatIcon] when fidelity to the design-system reference
+/// is required (e.g. the [SyvStatBtn] tile background sigil).
+class SyvStatSvg extends StatelessWidget {
+  /// Creates a tinted SVG stat glyph.
+  const SyvStatSvg({
+    super.key,
+    required this.glyph,
+    this.size = 30,
+    this.color,
+  });
+
+  /// Which stat glyph to draw.
+  final SyvStatGlyph glyph;
+
+  /// Edge length in logical pixels (square).
+  final double size;
+
+  /// Stroke color (applied via [ColorFilter.mode] / [BlendMode.srcIn]).
+  /// Defaults to ambient [IconTheme] color falling back to cream100.
+  final Color? color;
+
+  static String _svgFor(SyvStatGlyph g) {
+    switch (g) {
+      case SyvStatGlyph.cuerpo:
+        return kSvgCuerpo;
+      case SyvStatGlyph.mente:
+        return kSvgMente;
+      case SyvStatGlyph.alma:
+        return kSvgAlma;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final resolved = color ??
+        IconTheme.of(context).color ??
+        DefaultTextStyle.of(context).style.color ??
+        const Color(0xFFF3EEE4);
+
+    return SvgPicture.string(
+      _svgFor(glyph),
+      width: size,
+      height: size,
+      colorFilter: ColorFilter.mode(resolved, BlendMode.srcIn),
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// SyvStatIcon — stroke icon (CustomPainter). Kept for backward compatibility.
+// ---------------------------------------------------------------------------
 
 /// A stroke icon for a character stat. Ported verbatim from the design-system
 /// SVG path data (24×24 viewBox, 1.7 stroke, round caps/joins).

@@ -46,10 +46,11 @@ abstract final class SyvColors {
   static const white = Color(0xFFF3EEE4); // = cream100
 
   // second voices
-  static const amber500 = Color(0xFFE0A23C); // SyV tool accent (was Naranja lead)
-  static const amber300 = Color(0xFFEFC074); // lighter amber wash
-  static const teal500  = Color(0xFF4FA6AB); // petróleo
-  static const teal300  = Color(0xFF7CC4C8);
+  static const amber500    = Color(0xFFE0A23C); // SyV tool accent (was Naranja lead)
+  static const amber300    = Color(0xFFEFC074); // lighter amber wash
+  static const teal500     = Color(0xFF4FA6AB); // petróleo
+  static const teal300     = Color(0xFF7CC4C8);
+  static const amethyst500 = Color(0xFFB082C4); // mente accent (design-system ref)
 
   // semantic
   static const good = green500;

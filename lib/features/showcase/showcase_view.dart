@@ -195,15 +195,12 @@ class _ShowcaseViewState extends State<ShowcaseView> {
                   const SizedBox(height: SyvSpace.lg),
                   const SyvStat(stat: SyvStatKind.alma, value: 6),
 
-                  // (8) stat icons
-                  _section('08', 'iconografía'),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      SyvStatIcon.cuerpo(size: 56, color: SyvColors.amber500),
-                      SyvStatIcon.mente(size: 56, color: SyvColors.teal500),
-                      SyvStatIcon.alma(size: 56, color: SyvColors.celeste500),
-                    ],
+                  // (8) statbtn — tres botones en línea
+                  _section('08', 'statbtn · cuerpo · mente · alma en una línea'),
+                  const SyvStatBtnRow(
+                    cuerpo: 5,
+                    mente: 4,
+                    alma: 6,
                   ),
                 ],
               ),

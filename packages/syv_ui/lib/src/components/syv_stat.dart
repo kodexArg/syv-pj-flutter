@@ -6,7 +6,7 @@ import '../tokens/syv_tokens.dart';
 /// The three persisted character attributes of *Subordinación y Valor*. Each
 /// carries its own glyph and palette voice:
 ///  * [SyvStatKind.cuerpo] — biceps · ámbar
-///  * [SyvStatKind.mente]  — optical reticle · petróleo (teal)
+///  * [SyvStatKind.mente]  — optical reticle · amatista
 ///  * [SyvStatKind.alma]   — laurels · celeste
 enum SyvStatKind { cuerpo, mente, alma }
 
@@ -201,7 +201,7 @@ class SyvStat extends StatelessWidget {
         return const _StatSpec(
           label: 'mente',
           sub: 'reflejo · táctica',
-          accent: SyvColors.teal500,
+          accent: SyvColors.amethyst500,
           glyph: SyvStatGlyph.mente,
         );
       case SyvStatKind.alma:

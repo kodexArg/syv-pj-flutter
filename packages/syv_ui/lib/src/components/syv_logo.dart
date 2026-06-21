@@ -108,12 +108,14 @@ class SyvLogo extends StatelessWidget {
 
   static _LogoSizeSpec _spec(SyvLogoSize size) {
     switch (size) {
+      // All sizes reduced ~10% from original, rounded to whole logical-px values.
+      // Before → after: sm(30,18,9,11)→(27,16,8,10) md(42,25,11,14)→(38,23,10,13) lg(62,35,13,18)→(56,32,12,16)
       case SyvLogoSize.sm:
-        return const _LogoSizeSpec(mark: 30, word: 18, subSize: 9, gap: 11);
+        return const _LogoSizeSpec(mark: 27, word: 16, subSize: 8, gap: 10);
       case SyvLogoSize.md:
-        return const _LogoSizeSpec(mark: 42, word: 25, subSize: 11, gap: 14);
+        return const _LogoSizeSpec(mark: 38, word: 23, subSize: 10, gap: 13);
       case SyvLogoSize.lg:
-        return const _LogoSizeSpec(mark: 62, word: 35, subSize: 13, gap: 18);
+        return const _LogoSizeSpec(mark: 56, word: 32, subSize: 12, gap: 16);
     }
   }
 
