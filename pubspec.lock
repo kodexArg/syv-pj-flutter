@@ -223,6 +223,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.1"
+  syv_ui:
+    dependency: "direct main"
+    description:
+      path: "packages/syv_ui"
+      relative: true
+    source: path
+    version: "0.1.0"
   term_glyph:
     dependency: transitive
     description:

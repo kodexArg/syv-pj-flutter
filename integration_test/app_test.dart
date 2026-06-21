@@ -9,10 +9,12 @@ import 'package:syv_pj_flutter/app/app.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('app boots and shows the home view', (tester) async {
+  testWidgets('app boots and shows the design-system showcase',
+      (tester) async {
     await tester.pumpWidget(const SyvPjApp());
     await tester.pumpAndSettle();
 
-    expect(find.text('Hola, mundo!'), findsOneWidget);
+    expect(
+        find.text('SUBORDINACIÓN y VALOR', skipOffstage: false), findsWidgets);
   });
 }

@@ -35,6 +35,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
 
+  # Local design-system package ("Diseño Verde"). Reusable / extractable.
+  syv_ui:
+    path: packages/syv_ui
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -60,6 +64,23 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  # SyV design-system fonts (OFL, sourced from google/fonts). The generated
+  # tokens reference bare family names, so they MUST be declared app-level to
+  # resolve across the syv_ui package widgets.
+  fonts:
+    - family: Nunito
+      fonts:
+        # Variable font — weight axis covers 400/500/800 used by the tokens.
+        - asset: assets/fonts/Nunito-Variable.ttf
+    - family: DM Mono
+      fonts:
+        - asset: assets/fonts/DMMono-Regular.ttf
+        - asset: assets/fonts/DMMono-Medium.ttf
+          weight: 500
+    - family: Saira Stencil One
+      fonts:
+        - asset: assets/fonts/SairaStencilOne-Regular.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:
