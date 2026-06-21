@@ -2,6 +2,20 @@
 
 ## [Unreleased]
 
+- group: syv-design-system-integration
+  priority: high
+  commit: pending
+  changes:
+    - feat(ui): local Flutter package `packages/syv_ui/` with design tokens and components
+    - feat(design): DTCG tokens from ../syv-design-system (colors, typography, spacing)
+    - feat(theme): syvTheme() factory and SyvGlow background provider
+    - feat(components): SyvLogo, SyvButton, SyvChip, SyvCard, SyvInput, SyvKicker, SyvSwitch, SyvStat
+    - feat(icons): 3 custom stat-icon painters (attack, defense, speed)
+    - feat(fonts): bundled OFL fonts (Nunito, DM Mono, Saira Stencil One) at app level
+    - feat(showcase): lib/features/showcase/showcase_view.dart demo of all components
+    - feat(build): linux desktop target re-enabled and verified
+    - chore(quality): flutter analyze clean, flutter test passing, flutter build linux passing
+
 - group: flutter-linux-desktop-bootstrap
   priority: high
   commit: 7a89e97
