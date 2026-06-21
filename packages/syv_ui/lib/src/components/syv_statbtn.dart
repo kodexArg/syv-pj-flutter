@@ -161,13 +161,20 @@ class _SyvStatBtnState extends State<SyvStatBtn> {
                           textBaseline: TextBaseline.alphabetic,
                           children: <Widget>[
                             Expanded(
-                              child: Text(
-                                _label(widget.stat),
-                                style: SyvType.title.copyWith(
-                                  fontWeight: FontWeight.w800,
-                                  fontSize: 22,
-                                  height: 1,
-                                  color: SyvColors.cream100,
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  _label(widget.stat),
+                                  maxLines: 1,
+                                  softWrap: false,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: SyvType.title.copyWith(
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 22,
+                                    height: 1,
+                                    color: SyvColors.cream100,
+                                  ),
                                 ),
                               ),
                             ),
