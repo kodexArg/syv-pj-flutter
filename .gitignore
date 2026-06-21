@@ -15,3 +15,31 @@ build/
 
 # Generated plugin registrant ephemeral dir
 linux/flutter/ephemeral/
+
+# Android (machine-specific / generated / signing — NUNCA a GitHub)
+android/.gradle/
+android/captures/
+android/local.properties
+android/key.properties
+android/app/.cxx/
+**/*.jks
+**/*.keystore
+**/GeneratedPluginRegistrant.java
+
+# iOS (generated / machine-specific)
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+ios/Flutter/ephemeral/
+ios/Pods/
+ios/.symlinks/
+ios/Runner/GeneratedPluginRegistrant.*
+**/*.xcuserstate
+**/*.pbxuser
+
+# Dart / Pub extras
+.pub-cache/
+.pub/
+.packages
+migrate_working_dir/
+**/doc/api/
+*.log
