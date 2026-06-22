@@ -13,8 +13,9 @@ class ShowcaseView extends StatefulWidget {
 
 class _ShowcaseViewState extends State<ShowcaseView> {
   // Interactive demo state.
-  final TextEditingController _inputCtrl =
-      TextEditingController(text: 'damián diconte');
+  final TextEditingController _inputCtrl = TextEditingController(
+    text: 'damián diconte',
+  );
   bool _sw1 = true;
   bool _sw2 = false;
   bool _sw3 = true;
@@ -39,13 +40,19 @@ class _ShowcaseViewState extends State<ShowcaseView> {
               constraints: const BoxConstraints(maxWidth: 720),
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(
-                    SyvSpace.xxl, SyvSpace.s5, SyvSpace.xxl, SyvSpace.s7),
+                  SyvSpace.xxl,
+                  SyvSpace.s5,
+                  SyvSpace.xxl,
+                  SyvSpace.s7,
+                ),
                 children: <Widget>[
                   // (0) intro
                   const SyvLogo(size: SyvLogoSize.lg),
                   const SizedBox(height: SyvSpace.s5),
                   const SyvKicker(
-                      num: '00', child: Text('PRESENTATION KIT · CLANDESTINO')),
+                    num: '00',
+                    child: Text('PRESENTATION KIT · CLANDESTINO'),
+                  ),
                   const SizedBox(height: SyvSpace.md),
                   Text('diseño verde', style: SyvType.display),
                   const SizedBox(height: SyvSpace.md),
@@ -57,49 +64,59 @@ class _ShowcaseViewState extends State<ShowcaseView> {
                   ),
 
                   // (1) logo variants
-                  _section('01', 'logo'),
+                  SyvSection(num: '01', title: 'logo'),
                   const SyvLogo(
-                      variant: SyvLogoVariant.militar, size: SyvLogoSize.md),
+                    variant: SyvLogoVariant.militar,
+                    size: SyvLogoSize.md,
+                  ),
                   const SizedBox(height: SyvSpace.lg),
                   const SyvLogo(
-                      variant: SyvLogoVariant.argentina, size: SyvLogoSize.md),
+                    variant: SyvLogoVariant.argentina,
+                    size: SyvLogoSize.md,
+                  ),
                   const SizedBox(height: SyvSpace.lg),
                   const SyvLogo(
-                      variant: SyvLogoVariant.clerical, size: SyvLogoSize.md),
+                    variant: SyvLogoVariant.clerical,
+                    size: SyvLogoSize.md,
+                  ),
 
                   // (2) buttons
-                  _section('02', 'botones'),
+                  SyvSection(num: '02', title: 'botones'),
                   _wrap(<Widget>[
                     for (final c in SyvAccent.values)
-                      SyvButton(
-                          label: c.name, color: c, onPressed: () {}),
+                      SyvButton(label: c.name, color: c, onPressed: () {}),
                   ]),
                   const SizedBox(height: SyvSpace.md),
                   _wrap(<Widget>[
                     SyvButton(label: 'primary', onPressed: () {}),
                     SyvButton(
-                        label: 'secondary',
-                        variant: SyvButtonVariant.secondary,
-                        onPressed: () {}),
+                      label: 'secondary',
+                      variant: SyvButtonVariant.secondary,
+                      onPressed: () {},
+                    ),
                     SyvButton(
-                        label: 'ghost',
-                        variant: SyvButtonVariant.ghost,
-                        onPressed: () {}),
+                      label: 'ghost',
+                      variant: SyvButtonVariant.ghost,
+                      onPressed: () {},
+                    ),
                     SyvButton(label: 'mono', mono: true, onPressed: () {}),
                     SyvButton(
-                        label: 'sm', size: SyvButtonSize.sm, onPressed: () {}),
+                      label: 'sm',
+                      size: SyvButtonSize.sm,
+                      onPressed: () {},
+                    ),
                     const SyvButton(label: 'disabled', disabled: true),
                   ]),
 
                   // (3) chips
-                  _section('03', 'chips'),
+                  SyvSection(num: '03', title: 'chips'),
                   _wrap(<Widget>[
                     for (final t in SyvChipTone.values)
                       SyvChip(label: t.name, tone: t, dot: true),
                   ]),
 
                   // (4) cards
-                  _section('04', 'cards'),
+                  SyvSection(num: '04', title: 'cards'),
                   for (final v in SyvCardVariant.values) ...<Widget>[
                     SyvCard(
                       variant: v,
@@ -121,28 +138,33 @@ class _ShowcaseViewState extends State<ShowcaseView> {
                   ],
 
                   // (5) inputs
-                  _section('05', 'inputs'),
+                  SyvSection(num: '05', title: 'inputs'),
                   SyvInput(
-                      label: 'nombre',
-                      hint: 'campo máquina de escribir',
-                      controller: _inputCtrl),
+                    label: 'nombre',
+                    hint: 'campo máquina de escribir',
+                    controller: _inputCtrl,
+                  ),
                   const SizedBox(height: SyvSpace.xl),
                   const SyvInput(
-                      label: 'rango', placeholder: 'sargento primero…'),
+                    label: 'rango',
+                    placeholder: 'sargento primero…',
+                  ),
                   const SizedBox(height: SyvSpace.xl),
                   const SyvInput(
-                      label: 'clave',
-                      value: 'xxx',
-                      invalid: true,
-                      hint: 'credencial inválida'),
+                    label: 'clave',
+                    value: 'xxx',
+                    invalid: true,
+                    hint: 'credencial inválida',
+                  ),
                   const SizedBox(height: SyvSpace.xl),
                   const SyvInput(
-                      label: 'sellado',
-                      value: 'bloqueado',
-                      disabled: true),
+                    label: 'sellado',
+                    value: 'bloqueado',
+                    disabled: true,
+                  ),
 
                   // (6) switches
-                  _section('06', 'switches'),
+                  SyvSection(num: '06', title: 'switches'),
                   SyvSwitch(
                     checked: _sw1,
                     color: SyvAccent.olive,
@@ -165,13 +187,14 @@ class _ShowcaseViewState extends State<ShowcaseView> {
                   ),
                   const SizedBox(height: SyvSpace.md),
                   const SyvSwitch(
-                      checked: true,
-                      color: SyvAccent.teal,
-                      label: 'deshabilitado',
-                      disabled: true),
+                    checked: true,
+                    color: SyvAccent.teal,
+                    label: 'deshabilitado',
+                    disabled: true,
+                  ),
 
                   // (7) stats
-                  _section('07', 'stats'),
+                  SyvSection(num: '07', title: 'stats'),
                   SyvStat(
                     stat: SyvStatKind.cuerpo,
                     value: _cuerpo,
@@ -196,35 +219,16 @@ class _ShowcaseViewState extends State<ShowcaseView> {
                   const SyvStat(stat: SyvStatKind.alma, value: 6),
 
                   // (8) statbtn — tres botones en línea
-                  _section('08', 'statbtn · cuerpo · mente · alma en una línea'),
-                  const SyvStatBtnRow(
-                    cuerpo: 5,
-                    mente: 4,
-                    alma: 6,
+                  SyvSection(
+                    num: '08',
+                    title: 'statbtn · cuerpo · mente · alma en una línea',
                   ),
+                  const SyvStatBtnRow(cuerpo: 5, mente: 4, alma: 6),
                 ],
               ),
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _section(String num, String title) {
-    return Padding(
-      padding: const EdgeInsets.only(top: SyvSpace.s7, bottom: SyvSpace.lg),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          SyvKicker(num: num, child: Text(title.toUpperCase())),
-          const SizedBox(height: SyvSpace.sm),
-          const DecoratedBox(
-            decoration: BoxDecoration(color: SyvColors.ink600),
-            child: SizedBox(height: SyvBorders.hairlineWidth, width: 56),
-          ),
-        ],
       ),
     );
   }

@@ -24,6 +24,7 @@ export 'src/components/syv_chip.dart';
 export 'src/components/syv_input.dart';
 export 'src/components/syv_kicker.dart';
 export 'src/components/syv_logo.dart';
+export 'src/components/syv_section.dart';
 export 'src/components/syv_stat.dart';
 export 'src/components/syv_statbtn.dart';
 export 'src/components/syv_switch.dart';
