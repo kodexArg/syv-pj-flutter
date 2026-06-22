@@ -4,9 +4,6 @@ Los ADRs (Architecture Decision Records) documentan las decisiones que afectan
 la estructura y dirección del proyecto. Son la memoria del porqué, no solo del
 qué.
 
-> **Estado actual:** ningún ADR registrado. Este directorio está scaffoldeado
-> y listo para el primer ADR cuando el usuario lo apruebe.
-
 ---
 
 ## Para qué sirven
@@ -21,9 +18,9 @@ su estado actual, sin tener que reconstruirlo desde git log.
 
 ## Formato
 
-Nombre de archivo: `YYYYMMDD-slug-descriptivo.md`
+Nombre de archivo: `adr-NNN-slug-descriptivo.md` (tres dígitos, cero a la izquierda)
 
-Ejemplos: `20260621-window-manager-choice.md`, `20260701-http-client-strategy.md`
+Ejemplos: `adr-003-window-manager-choice.md`, `adr-004-http-client-strategy.md`
 
 Ciclo de vida del campo `status`:
 
@@ -34,7 +31,7 @@ Ciclo de vida del campo `status`:
 | `obsoleto` | Fue válido, ya no aplica |
 | `reemplazado` | Sustituido por otro ADR (indicar cuál) |
 
-Usar la plantilla en [0000-template.md](0000-template.md).
+Usar la plantilla en [adr-000-template.md](adr-000-template.md).
 
 ---
 
@@ -47,3 +44,13 @@ Usar la plantilla en [0000-template.md](0000-template.md).
 
 No hace falta un ADR para cada línea de código — solo para decisiones con
 impacto en la dirección del proyecto.
+
+---
+
+## ADRs registrados
+
+| ADR | Título | Status |
+|---|---|---|
+| [adr-000](adr-000-template.md) | Cómo usamos ADRs en este proyecto (+ plantilla) | aceptado |
+| [adr-001](adr-001-glosario.md) | Glosario: cómo nombramos cada cosa | aceptado |
+| [adr-002](adr-002-canonical-docs.md) | Documentos canónicos obligatorios | aceptado |
