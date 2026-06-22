@@ -2,6 +2,17 @@
 
 ## [Unreleased]
 
+- group: living-documentation-baseline
+  priority: high
+  commit: pending
+  changes:
+    - docs(arch): ARCHITECTURE.md canonical — mobile-first target, FVM-pinned SDK, syv_ui presentation layer
+    - docs(reqs): REQUIREMENTS.md — functional + non-functional standing requirements
+    - docs(design): DESIGN-SYSTEM.md — catalog of 10 Syv* components with implementation links
+    - docs(adr): adr-001-glosario.md — domain↔code naming glossary with verified vault links to syv-docs
+    - docs(adrs): symlinks in .claude/rules/ point to docs/adrs/ for agent context
+    - docs(cleanup): deleted stale docs/architecture.md, docs/design-system.md (superseded by uppercase canonical versions)
+
 - group: syv-design-system-integration
   priority: high
   commit: pending
