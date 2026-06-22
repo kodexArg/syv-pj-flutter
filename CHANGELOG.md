@@ -4,7 +4,7 @@
 
 - group: living-documentation-baseline
   priority: high
-  commit: pending
+  commit: 9e10a76
   changes:
     - docs(arch): ARCHITECTURE.md canonical — mobile-first target, FVM-pinned SDK, syv_ui presentation layer
     - docs(reqs): REQUIREMENTS.md — functional + non-functional standing requirements
