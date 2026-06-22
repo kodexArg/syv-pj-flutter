@@ -64,26 +64,12 @@ class _SyvStatBtnState extends State<SyvStatBtn> {
     }
   }
 
-  String _label(SyvStatKind stat) {
-    switch (stat) {
-      case SyvStatKind.cuerpo:
-        return 'cuerpo';
-      case SyvStatKind.mente:
-        return 'mente';
-      case SyvStatKind.alma:
-        return 'alma';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final accent = _accent(widget.stat);
     final v = widget.value.clamp(_min, _max);
     final active = _hover || _pressed;
     final borderColor = active ? accent : SyvColors.ink600;
-
-    // Engraved sigil color: accent at 22% over near-black ink1000.
-    final sigilColor = Color.lerp(SyvColors.ink1000, accent, 0.22)!;
 
     return MouseRegion(
       cursor: widget.onPressed != null
@@ -108,7 +94,10 @@ class _SyvStatBtnState extends State<SyvStatBtn> {
             curve: SyvMotion.settle,
             decoration: BoxDecoration(
               color: SyvColors.ink1000,
-              border: Border.all(color: borderColor, width: SyvBorders.hairlineWidth),
+              border: Border.all(
+                color: borderColor,
+                width: SyvBorders.hairlineWidth,
+              ),
               borderRadius: const BorderRadius.all(SyvRadius.lg),
             ),
             child: ClipRRect(
@@ -133,71 +122,31 @@ class _SyvStatBtnState extends State<SyvStatBtn> {
                     ),
                   ),
 
-                  // Layer 2: engraved sigil centered, ~78% of tile, dark-tint.
+                  // Layer 2: beveled sigil — the hero. Raised above the gauge,
+                  // embossed (light edge up-left, dark edge down-right) so it
+                  // reads as a bevel rather than a flat fill.
                   Positioned.fill(
                     child: LayoutBuilder(
                       builder: (context, constraints) {
-                        final iconSize = constraints.maxWidth * 0.78;
-                        return Center(
-                          child: SyvStatSvg(
+                        final iconSize = constraints.maxWidth * 0.66;
+                        return Align(
+                          alignment: const Alignment(0, -0.28),
+                          child: _BevelSigil(
                             glyph: _glyphFor(widget.stat),
                             size: iconSize,
-                            color: sigilColor,
+                            accent: accent,
                           ),
                         );
                       },
                     ),
                   ),
 
-                  // Layer 3: content (above sigil).
+                  // Layer 3: the six-pip gauge, pinned to the bottom.
                   Padding(
                     padding: const EdgeInsets.all(SyvSpace.md),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        // Header row: name (left) + value (right).
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.baseline,
-                          textBaseline: TextBaseline.alphabetic,
-                          children: <Widget>[
-                            Expanded(
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  _label(widget.stat),
-                                  maxLines: 1,
-                                  softWrap: false,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: SyvType.title.copyWith(
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 22,
-                                    height: 1,
-                                    color: SyvColors.cream100,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Text(
-                              '$v',
-                              style: SyvType.display.copyWith(
-                                fontSize: 26,
-                                height: 1,
-                                color: accent,
-                                fontFeatures: const <FontFeature>[
-                                  FontFeature.tabularFigures(),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        // Spacer pushes gauge to bottom.
-                        const Spacer(),
-
-                        // Gauge: 6 pips, ON = filled + accent border, OFF = transparent + ink600.
-                        _gauge(accent, v),
-                      ],
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: _gauge(accent, v),
                     ),
                   ),
                 ],
@@ -224,24 +173,78 @@ class _SyvStatBtnState extends State<SyvStatBtn> {
     final segs = <Widget>[];
     for (var s = _min; s <= _max; s++) {
       final on = s <= v;
-      segs.add(Expanded(
-        child: AnimatedContainer(
-          duration: SyvMotion.fast,
-          curve: SyvMotion.settle,
-          height: 7,
-          decoration: BoxDecoration(
-            color: on ? accent : Colors.transparent,
-            border: Border.all(
-              color: on ? accent : SyvColors.ink600,
-              width: SyvBorders.hairlineWidth,
+      segs.add(
+        Expanded(
+          child: AnimatedContainer(
+            duration: SyvMotion.fast,
+            curve: SyvMotion.settle,
+            height: 7,
+            decoration: BoxDecoration(
+              color: on ? accent : Colors.transparent,
+              border: Border.all(
+                color: on ? accent : SyvColors.ink600,
+                width: SyvBorders.hairlineWidth,
+              ),
+              borderRadius: const BorderRadius.all(SyvRadius.sm),
             ),
-            borderRadius: const BorderRadius.all(SyvRadius.sm),
           ),
         ),
-      ));
+      );
       if (s < _max) segs.add(const SizedBox(width: 4));
     }
     return Row(children: segs);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// _BevelSigil — the stat glyph rendered with a subtle emboss/bevel.
+// ---------------------------------------------------------------------------
+
+/// Draws the stat glyph three times to fake a beveled engraving: a light edge
+/// offset up-left, a dark edge offset down-right, and a mid-tone face on top.
+/// Lit, but quietly — the offsets are ~1px so it reads as a bevel, not a glow.
+class _BevelSigil extends StatelessWidget {
+  const _BevelSigil({
+    required this.glyph,
+    required this.size,
+    required this.accent,
+  });
+
+  final SyvStatGlyph glyph;
+  final double size;
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context) {
+    // Face: accent lifted off near-black — present, but still restrained.
+    final Color face = Color.lerp(SyvColors.ink1000, accent, 0.32)!;
+    // Light edge (up-left) and dark edge (down-right) form the bevel.
+    final Color light = Color.lerp(
+      accent,
+      SyvColors.cream100,
+      0.4,
+    )!.withValues(alpha: 0.55);
+    final Color dark = const Color(0xFF000000).withValues(alpha: 0.6);
+    final double d = size / 70; // ~1px at the tile's icon size.
+
+    return SizedBox(
+      width: size,
+      height: size,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: <Widget>[
+          Transform.translate(
+            offset: Offset(d, d),
+            child: SyvStatSvg(glyph: glyph, size: size, color: dark),
+          ),
+          Transform.translate(
+            offset: Offset(-d, -d),
+            child: SyvStatSvg(glyph: glyph, size: size, color: light),
+          ),
+          SyvStatSvg(glyph: glyph, size: size, color: face),
+        ],
+      ),
+    );
   }
 }
 
