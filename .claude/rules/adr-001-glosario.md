@@ -1,0 +1,1 @@
+../../docs/adrs/adr-001-glosario.md

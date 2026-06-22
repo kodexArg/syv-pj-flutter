@@ -1,0 +1,1 @@
+../../docs/adrs/adr-000-template.md

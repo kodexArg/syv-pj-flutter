@@ -1,0 +1,1 @@
+../../docs/adrs/adr-002-canonical-docs.md
