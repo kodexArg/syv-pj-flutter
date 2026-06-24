@@ -28,3 +28,4 @@ export 'src/components/syv_section.dart';
 export 'src/components/syv_stat.dart';
 export 'src/components/syv_statbtn.dart';
 export 'src/components/syv_switch.dart';
+export 'src/components/syv_textarea.dart';

@@ -16,6 +16,10 @@ class _ShowcaseViewState extends State<ShowcaseView> {
   final TextEditingController _inputCtrl = TextEditingController(
     text: 'damián diconte',
   );
+  final TextEditingController _notaCtrl = TextEditingController(
+    text: 'damián diconte llegó a dársena con una orden sellada y ninguna '
+        'intención de cumplirla al pie de la letra.',
+  );
   bool _sw1 = true;
   bool _sw2 = false;
   bool _sw3 = true;
@@ -26,6 +30,7 @@ class _ShowcaseViewState extends State<ShowcaseView> {
   @override
   void dispose() {
     _inputCtrl.dispose();
+    _notaCtrl.dispose();
     super.dispose();
   }
 
@@ -229,6 +234,19 @@ class _ShowcaseViewState extends State<ShowcaseView> {
                     title: 'statbtn · cuerpo · mente · alma en una línea',
                   ),
                   const SyvStatBtnRow(cuerpo: 5, mente: 4, alma: 6),
+
+                  // (9) textarea — multilínea, ancho de pantalla, sin marco
+                  SyvSection(num: '09', title: 'textarea'),
+                  SyvTextarea(
+                    label: 'nota',
+                    hint: 'escritura larga · crece y luego scrollea',
+                    controller: _notaCtrl,
+                  ),
+                  const SizedBox(height: SyvSpace.xl),
+                  const SyvTextarea(
+                    label: 'informe',
+                    placeholder: 'redactar parte de situación…',
+                  ),
                 ],
               ),
             ),
