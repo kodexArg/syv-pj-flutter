@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../tokens/syv_tokens.dart';
 
-/// A borderless "typewriter" text field. At rest only the platen baseline rule
-/// shows; on focus the rule greens. [invalid] turns the rule red. The interior
-/// is monospace (DM Mono). Label is mono uppercase with a green `›` marker.
+/// A borderless "typewriter" text field. At rest only the faint box fill
+/// shows; on focus the monospace cell grid types in, a glow rises from the
+/// bottom, and a flat underscore caret rides the baseline. [invalid] reddens
+/// the focus accent and the hint. The interior is monospace (DM Mono). Label
+/// is mono uppercase with a green `›` marker.
 class SyvInput extends StatefulWidget {
   /// Creates an input field.
   const SyvInput({
@@ -115,13 +117,8 @@ class _SyvInputState extends State<SyvInput> {
 
   @override
   Widget build(BuildContext context) {
-    // Accent drives the focus grid + glow; rule is the platen baseline.
+    // Accent drives the focus grid + glow.
     final Color accent = widget.invalid ? SyvColors.bad : SyvColors.green500;
-    final Color rule = widget.invalid
-        ? SyvColors.bad
-        : _focused
-        ? SyvColors.green500
-        : SyvColors.ink600;
     final bool lit = _focused && !widget.disabled;
 
     final field = Opacity(
@@ -138,14 +135,13 @@ class _SyvInputState extends State<SyvInput> {
           ),
           child: CustomPaint(
             painter: _PlatenPainter(
-              rule: rule,
               accent: accent,
               focused: lit,
               cell: _cell,
               caretX: lit ? _caretX() : null,
             ),
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(12, 11, 12, 8),
+              padding: const EdgeInsets.fromLTRB(12, 9, 12, 6),
               child: TextField(
                 controller: _controller,
                 focusNode: _focus,
@@ -220,21 +216,17 @@ class _SyvInputState extends State<SyvInput> {
   }
 }
 
-/// Paints the typewriter "platen": at rest only the inset baseline rule shows.
-/// On focus the monospace cell grid types in (one hairline per character cell),
-/// the baseline greens, and a soft inner glow rises from the bottom — mirroring
-/// the web design-system `:focus` state (cell grid + baseline + bottom glow).
+/// Paints the typewriter "platen": at rest nothing shows. On focus the
+/// monospace cell grid types in (one hairline per character cell), a soft inner
+/// glow rises from the bottom, and a flat underscore caret rides the baseline —
+/// mirroring the web design-system `:focus` state. No baseline rule.
 class _PlatenPainter extends CustomPainter {
   const _PlatenPainter({
-    required this.rule,
     required this.accent,
     required this.focused,
     required this.cell,
     required this.caretX,
   });
-
-  /// Baseline rule color (ink at rest, greened on focus, red when invalid).
-  final Color rule;
 
   /// Accent driving the focus cell grid and the bottom glow.
   final Color accent;
@@ -248,11 +240,11 @@ class _PlatenPainter extends CustomPainter {
   /// Caret x-offset from the field's left edge, or null when unfocused.
   final double? caretX;
 
-  // Field horizontal padding (12) — baseline and grid inset from the edges.
+  // Field horizontal padding (12) — grid inset from the edges.
   static const double _inset = 12;
 
-  // Baseline sits 8px above the bottom, matching the field's content padding.
-  static const double _baselineUp = 8;
+  // Caret baseline sits 6px above the bottom, matching the content padding.
+  static const double _baselineUp = 6;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -264,7 +256,7 @@ class _PlatenPainter extends CustomPainter {
       final Paint grid = Paint()
         ..color = accent.withValues(alpha: 0.10)
         ..strokeWidth = 1;
-      for (double x = _inset + cell; x <= size.width - _inset; x += cell) {
+      for (double x = _inset; x <= size.width - _inset; x += cell) {
         canvas.drawLine(Offset(x, 0), Offset(x, size.height), grid);
       }
 
@@ -294,22 +286,11 @@ class _PlatenPainter extends CustomPainter {
         );
       }
     }
-
-    // Baseline platen rule, inset from the sides.
-    final Paint base = Paint()
-      ..color = rule
-      ..strokeWidth = 1.5;
-    canvas.drawLine(
-      Offset(_inset, baseY),
-      Offset(size.width - _inset, baseY),
-      base,
-    );
   }
 
   @override
   bool shouldRepaint(_PlatenPainter old) =>
       old.focused != focused ||
-      old.rule != rule ||
       old.accent != accent ||
       old.cell != cell ||
       old.caretX != caretX;

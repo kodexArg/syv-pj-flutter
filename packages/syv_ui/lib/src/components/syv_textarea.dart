@@ -100,11 +100,6 @@ class _SyvTextareaState extends State<SyvTextarea> {
   Widget build(BuildContext context) {
     // Accent drives the focus grid + glow; rule is the platen baseline.
     final Color accent = widget.invalid ? SyvColors.bad : SyvColors.green500;
-    final Color rule = widget.invalid
-        ? SyvColors.bad
-        : _focused
-        ? SyvColors.green500
-        : SyvColors.ink600;
     final bool lit = _focused && !widget.disabled;
 
     final field = Opacity(
@@ -121,13 +116,12 @@ class _SyvTextareaState extends State<SyvTextarea> {
           ),
           child: CustomPaint(
             painter: _TextareaPlatenPainter(
-              rule: rule,
               accent: accent,
               focused: lit,
               cell: _cell,
             ),
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(12, 11, 12, 8),
+              padding: const EdgeInsets.fromLTRB(12, 9, 12, 6),
               child: TextField(
                 controller: _controller,
                 focusNode: _focus,
@@ -206,18 +200,14 @@ class _SyvTextareaState extends State<SyvTextarea> {
 
 /// Paints the multiline platen: at rest only the inset bottom rule shows. On
 /// focus the monospace cell grid types in across the **full height** (one
-/// hairline per character cell), the bottom rule greens, and a soft inner glow
-/// rises from the bottom — the long-form translation of [SyvInput]'s platen.
+/// hairline per character cell) and a soft inner glow rises from the bottom —
+/// the long-form translation of [SyvInput]'s platen. No baseline rule.
 class _TextareaPlatenPainter extends CustomPainter {
   const _TextareaPlatenPainter({
-    required this.rule,
     required this.accent,
     required this.focused,
     required this.cell,
   });
-
-  /// Bottom rule color (ink at rest, greened on focus, red when invalid).
-  final Color rule;
 
   /// Accent driving the focus cell grid and the bottom glow.
   final Color accent;
@@ -228,23 +218,18 @@ class _TextareaPlatenPainter extends CustomPainter {
   /// Width of one monospace cell, in logical pixels.
   final double cell;
 
-  // Field horizontal padding (12) — rule and grid inset from the edges.
+  // Field horizontal padding (12) — grid inset from the edges.
   static const double _inset = 12;
-
-  // Bottom rule sits 8px above the bottom, matching the content padding.
-  static const double _baselineUp = 8;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final double baseY = size.height - _baselineUp;
-
     if (focused) {
       // Monospace cell grid: one accent hairline at every cell boundary,
       // running the full height so it backs every line of long-form text.
       final Paint grid = Paint()
         ..color = accent.withValues(alpha: 0.10)
         ..strokeWidth = 1;
-      for (double x = _inset + cell; x <= size.width - _inset; x += cell) {
+      for (double x = _inset; x <= size.width - _inset; x += cell) {
         canvas.drawLine(Offset(x, 0), Offset(x, size.height), grid);
       }
 
@@ -261,22 +246,11 @@ class _TextareaPlatenPainter extends CustomPainter {
         ).createShader(glowRect);
       canvas.drawRect(glowRect, glow);
     }
-
-    // Bottom platen rule, inset from the sides.
-    final Paint base = Paint()
-      ..color = rule
-      ..strokeWidth = 1.5;
-    canvas.drawLine(
-      Offset(_inset, baseY),
-      Offset(size.width - _inset, baseY),
-      base,
-    );
   }
 
   @override
   bool shouldRepaint(_TextareaPlatenPainter old) =>
       old.focused != focused ||
-      old.rule != rule ||
       old.accent != accent ||
       old.cell != cell;
 }
