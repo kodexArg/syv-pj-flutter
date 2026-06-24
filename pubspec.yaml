@@ -81,6 +81,12 @@ flutter:
     - family: Saira Stencil One
       fonts:
         - asset: assets/fonts/SairaStencilOne-Regular.ttf
+    - family: Bitter
+      fonts:
+        # Variable font — weight axis covers 100–900; used at w400 for prose.
+        - asset: assets/fonts/Bitter[wght].ttf
+        - asset: assets/fonts/Bitter-Italic[wght].ttf
+          style: italic
 
   # To add assets to your application, add an assets section, like this:
   # assets:
