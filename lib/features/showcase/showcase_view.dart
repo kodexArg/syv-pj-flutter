@@ -216,6 +216,11 @@ class _ShowcaseViewState extends State<ShowcaseView> {
                     onChanged: (v) => setState(() => _alma = v),
                   ),
                   const SizedBox(height: SyvSpace.lg),
+                  // sin botones — solo lectura, los tres atributos
+                  const SyvStat(stat: SyvStatKind.cuerpo, value: 5),
+                  const SizedBox(height: SyvSpace.lg),
+                  const SyvStat(stat: SyvStatKind.mente, value: 4),
+                  const SizedBox(height: SyvSpace.lg),
                   const SyvStat(stat: SyvStatKind.alma, value: 6),
 
                   // (8) statbtn — tres botones en línea
