@@ -9,8 +9,7 @@ import 'package:syv_pj_flutter/app/app.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('app boots and shows the design-system showcase',
-      (tester) async {
+  testWidgets('app boots and shows the home screen', (tester) async {
     await tester.pumpWidget(const SyvPjApp());
     await tester.pumpAndSettle();
 
