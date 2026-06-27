@@ -9,12 +9,23 @@
 
 ## Qué es esto
 
-`syv-pj-flutter` es un **visualizador de personajes** del universo SyV.
-Nada más. Toma un personaje y lo **muestra**: lee, presenta, navega fichas.
-No crea lógica de dominio, no valida reglas, no genera personajes.
+`syv-pj-flutter` es **la interfaz del universo SyV**: la cara que muestra los
+personajes y cuenta sus historias. Empezó como un visualizador de fichas y crece
+hacia algo más grande — **el front-end común de todos los proyectos que se
+generan alrededor de la SSOT** (hoy el creador de personajes; mañana, el
+simulador de batallas, y lo que venga).
 
-- **Solo visualiza.** Es una capa de presentación.
-- **No tiene backend propio.** Toda la lógica vive afuera.
+- **Es la capa de presentación del ecosistema.** No tiene backend propio: la
+  lógica de dominio (qué es un personaje) y el motor (generar / validar / servir)
+  viven afuera, en `syv-pj` y `syv-pj-api`. Nosotros los **consumimos** y los
+  **mostramos**.
+- **Construimos con el lore en la cabeza.** Cada feature nace pensando en el
+  universo (`syv-docs`), no en el framework. El nombre completo lo dice:
+  **subordinación y valor → personajes → flutter** (lore → dominio → interfaz).
+
+> El mapa de los proyectos hermanos y qué se consigue de cada uno vive en
+> [`docs/ecosystem/`](docs/ecosystem/README.md). Entender `syv-pj` y `syv-pj-api`
+> es **tan importante como** entender el universo `syv-docs`.
 
 ---
 

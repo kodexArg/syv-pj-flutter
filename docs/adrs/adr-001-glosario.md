@@ -63,13 +63,19 @@ Metadatos](../../../syv-docs/0_proyecto/guias-para-colaboradores/guia-de-metadat
 
 ---
 
-## Términos provisionales del proyecto (pendientes de canonizar)
+## Atributos del personaje y términos de muestra
+
+La triada de atributos **ya está canonizada** — no en `syv-docs` (el lore no
+tiene una entidad de atributo dedicada) sino en **`syv-pj`**, el módulo de
+dominio, en [docs/atributos.md](../../../syv-pj/docs/atributos.md): escala entera
+**2..7**, son las únicas magnitudes numéricas persistidas de la ficha. Los
+nombres legacy `fis`/`tac`/`men` están retirados.
 
 | Término | Cómo lo nombramos en código | Estado | Notas |
 |---|---|---|---|
-| **cuerpo** | `SyvStatKind.cuerpo`, `_cuerpo` | **pendiente de canonizar en syv-docs** | Etiqueta de atributo usada **solo** en `lib/features/showcase/showcase_view.dart` y `SyvStatBtnRow`. No existe entidad de atributo canónica en el vault todavía. Sin enlace al vault hasta que se canonice. |
-| **mente** | `SyvStatKind.mente`, `_mente` | **pendiente de canonizar en syv-docs** | Ídem cuerpo. Etiqueta de muestra del showcase. |
-| **alma** | `SyvStatKind.alma`, `_alma` | **pendiente de canonizar en syv-docs** | Ídem cuerpo. Etiqueta de muestra del showcase. |
+| **cuerpo** | `SyvStatKind.cuerpo`, `_cuerpo` | **canónico — dominio `syv-pj`** | Fuerza, resistencia, potencia física. Fuente: [syv-pj/docs/atributos.md](../../../syv-pj/docs/atributos.md). Acento DS: ámbar (`amber500`). |
+| **mente** | `SyvStatKind.mente`, `_mente` | **canónico — dominio `syv-pj`** | Puntería, reflejos, lectura táctica. Fuente: [syv-pj/docs/atributos.md](../../../syv-pj/docs/atributos.md). Acento DS: amatista (`amethyst500`). |
+| **alma** | `SyvStatKind.alma`, `_alma` | **canónico — dominio `syv-pj`** | Aura, liderazgo, voluntad, temple ante el miedo. Fuente: [syv-pj/docs/atributos.md](../../../syv-pj/docs/atributos.md). Acento DS: celeste (`celeste500`). |
 | **damián diconte** | texto de ejemplo en `_inputCtrl` del showcase | Personaje canónico, uso de muestra | El término ES canónico ([Damián DiConte](../../../syv-docs/3_personajes/principales/damian-diconte.md)); su aparición en el showcase es solo dato de ejemplo del campo de texto. |
 
 ---
@@ -99,9 +105,10 @@ mientras que el contenido visible y los términos de dominio siguen al castellan
 
 - Cualquier agente o dev consulta **este archivo** antes de nombrar algo nuevo;
   si el término no está, se agrega acá por la misma regla agnóstica.
-- Los términos provisionales (`cuerpo`/`mente`/`alma`) quedan marcados como tales
-  hasta que exista una entidad de atributo canónica en `syv-docs`; recién
-  entonces se les asigna enlace al vault.
+- Los atributos (`cuerpo`/`mente`/`alma`) son **canónicos del dominio `syv-pj`**
+  (no del lore `syv-docs`): su fuente es
+  [syv-pj/docs/atributos.md](../../../syv-pj/docs/atributos.md) (escala 2..7). El
+  vault de lore no tiene entidad de atributo dedicada y no se espera que la tenga.
 - Cambios de nombre en el corpus se propagan acá; los enlaces relativos asumen el
   layout hermano `syv-pj-flutter/` ↔ `syv-docs/` bajo `~/Dev/SyV/`.
 

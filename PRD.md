@@ -2,7 +2,44 @@
 
 **Proyecto:** `syv-pj-flutter`
 **Ecosistema:** Subordinación y Valor (SyV)
-**Estado actual:** Etapa 1 completada
+**Estado actual:** Etapa 1 completada · **Norte actualizado 2026-06-27**
+
+---
+
+## Norte / Steering (2026-06-27)
+
+Este proyecto dejó de ser "solo un visualizador". El norte es más grande:
+
+**`syv-pj-flutter` es la interfaz del universo — la cara que muestra los
+personajes y cuenta las historias de *Subordinación y Valor*.** A medida que el
+ecosistema genera nuevas piezas *a nuestras espaldas* (el motor `syv-pj-api`, el
+simulador de batallas que viene, un futuro juego), esta app se convierte en su
+**front-end común**: el lugar donde todo eso se ve y se toca.
+
+Una sola disciplina lo gobierna: **cada vez que creamos algo, lo hacemos con el
+lore en la cabeza.** No diseñamos features framework-first; partimos del universo
+(`syv-docs`) y del dominio (`syv-pj`), y recién entonces elegimos el cómo en
+Flutter. El nombre completo del proyecto es el mapa de la misión:
+
+> **SUBORDINACIÓN Y VALOR → PERSONAJES → FLUTTER**
+> (el lore · `syv-docs`) → (el dominio · `syv-pj`) → (la interfaz · esta app)
+
+Qué implica este norte:
+
+- **Seguimos sin backend propio.** No reimplementamos lógica: la consumimos.
+  `syv-pj` define qué es un personaje; `syv-pj-api` lo genera/valida/sirve; el
+  design system lo viste; nosotros lo mostramos. Mapa completo, endpoints y
+  contratos en [`docs/ecosystem/`](docs/ecosystem/README.md) — lectura previa a
+  cualquier integración o nombre de campo nuevo.
+- **Cada superficie nueva entra con el lore puesto.** Una pantalla no es "una
+  lista" o "un form": es una vista del universo (una ficha, un encuentro, una
+  facción).
+- **Crecemos por features, no por etapas cerradas.** El frontpage ya agrupa las
+  acciones (generar personaje, listado, design system) y sumará más a medida que
+  los proyectos hermanos maduren.
+
+> Las **Etapas** de más abajo son el registro histórico del arranque. El norte de
+> arriba es la dirección vigente; ante conflicto, manda el norte.
 
 ---
 
