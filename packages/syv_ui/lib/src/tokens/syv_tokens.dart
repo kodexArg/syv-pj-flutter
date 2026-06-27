@@ -2,10 +2,11 @@
 // "Diseño Verde" / Green Matte-Military — green evolution of the Naranja system.
 // Do not hand-edit colors/values here; edit the JSON SSOT and regenerate.
 // Mobile-first, warm near-black, military olive-drab lead, neon glow exception,
-// Nunito + DM Mono + Saira Stencil One (logo wordmark only).
+// Nunito + DM Mono + Saira Stencil One (logo wordmark only) + Bitter (prose serif).
 //
-// Fonts: declare 'Nunito', 'DM Mono', and 'Saira Stencil One' in pubspec.yaml
-// (or use google_fonts). Saira Stencil One is for the brand wordmark only.
+// Fonts: declare 'Nunito', 'DM Mono', 'Saira Stencil One', and 'Bitter' in
+// pubspec.yaml (or use google_fonts). Saira Stencil One is for the brand
+// wordmark only. Bitter is for long-form prose reading (SyvType.prose).
 
 import 'package:flutter/material.dart';
 
@@ -22,6 +23,7 @@ abstract final class SyvColors {
 
   // text
   static const cream100 = Color(0xFFF3EEE4); // primary text
+  static const cream200 = Color(0xFFE4DAC8); // parchment, long-form prose reading text; softer than cream100
   static const warm200  = Color(0xFFCDBFA8); // secondary text
 
   // green (lead accent — matte military olive-drab 1978)
@@ -50,7 +52,7 @@ abstract final class SyvColors {
   static const amber300    = Color(0xFFEFC074); // lighter amber wash
   static const teal500     = Color(0xFF4FA6AB); // petróleo
   static const teal300     = Color(0xFF7CC4C8);
-  static const amethyst500 = Color(0xFFB082C4); // mente accent (design-system ref)
+  static const amethyst500 = Color(0xFFB082C4); // amatista — mente attribute accent
 
   // semantic
   static const good = green500;
@@ -94,6 +96,7 @@ abstract final class SyvMotion {
 abstract final class SyvType {
   static const String sans = 'Nunito';
   static const String mono = 'DM Mono';
+  static const String serif = 'Bitter'; // long-form prose reading
   static const String logo = 'Saira Stencil One'; // brand wordmark only
 
   static const TextStyle display = TextStyle(
@@ -114,6 +117,11 @@ abstract final class SyvType {
   static const TextStyle kicker = TextStyle(
       fontFamily: mono, fontWeight: FontWeight.w400, fontSize: 12,
       height: 1.2, letterSpacing: 2.16, color: SyvColors.green500);
+  /// Book-like slab serif for long-form paragraph text (Bitter variable).
+  /// Softer parchment tone (cream200) to reduce eye strain on dark backgrounds.
+  static const TextStyle prose = TextStyle(
+      fontFamily: serif, fontWeight: FontWeight.w400, fontSize: 17,
+      height: 1.62, letterSpacing: 0, color: SyvColors.cream200);
 }
 
 /// The single off-center neon-green radial halo (the neon exception in
