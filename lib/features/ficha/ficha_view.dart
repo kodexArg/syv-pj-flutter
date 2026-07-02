@@ -10,31 +10,7 @@ class FichaView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: SyvColors.ink1000,
-      body: SyvGlow(
-        child: SafeArea(
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 720),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  SyvSpace.xxl,
-                  SyvSpace.s5,
-                  SyvSpace.xxl,
-                  SyvSpace.s7,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: const <Widget>[
-                    SyvHeader(),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
+    // Header only — a blank canvas that grows as the feature ships.
+    return const SyvScreen();
   }
 }
