@@ -13,7 +13,7 @@ Requisito previo: [FVM](https://fvm.app/) instalado (`fvm --version` → 4.1.1).
 
 ```bash
 # 1. Instalar el SDK de Flutter pinneado
-cd /home/kodex/Dev/SyV/syv-pj-flutter
+cd /home/kodex/SyV/syv-pj-flutter
 fvm install
 
 # 2. Obtener dependencias

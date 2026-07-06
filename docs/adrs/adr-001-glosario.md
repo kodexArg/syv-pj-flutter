@@ -110,7 +110,7 @@ mientras que el contenido visible y los términos de dominio siguen al castellan
   [syv-pj/docs/atributos.md](../../../syv-pj/docs/atributos.md) (escala 2..7). El
   vault de lore no tiene entidad de atributo dedicada y no se espera que la tenga.
 - Cambios de nombre en el corpus se propagan acá; los enlaces relativos asumen el
-  layout hermano `syv-pj-flutter/` ↔ `syv-docs/` bajo `~/Dev/SyV/`.
+  layout hermano `syv-pj-flutter/` ↔ `syv-docs/` bajo `~/SyV/`.
 
 ## Referencias
 

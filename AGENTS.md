@@ -84,7 +84,7 @@ Tests en `test/widget_test.dart`. Integración en `integration_test/`.
 ## Cómo correr
 
 ```bash
-cd /home/kodex/Dev/SyV/syv-pj-flutter
+cd /home/kodex/SyV/syv-pj-flutter
 fvm flutter run -d linux
 ```
 
