@@ -1,7 +1,7 @@
 /// Subordinación y Valor — "Diseño Verde" design system for Flutter.
 ///
 /// Public API: tokens, theme + glow, the shared accent foundation, the three
-/// stat icons, and the eight Syv* components.
+/// stat icons, and the Syv* components.
 library;
 
 // Tokens (generated SSOT).
@@ -18,6 +18,7 @@ export 'src/foundations/syv_accent.dart';
 export 'src/icons/syv_stat_icons.dart';
 
 // Components.
+export 'src/components/syv_badge.dart';
 export 'src/components/syv_button.dart';
 export 'src/components/syv_card.dart';
 export 'src/components/syv_chip.dart';
